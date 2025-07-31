@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-indigo-400 mb-6">Available Quizzes</h2>
+    {% if quizzes %}
+        <ul class="space-y-4">
+            {% for quiz in quizzes %}
+                <li class="p-4 bg-gray-700 rounded-md">
+                    <div class="flex justify-between items-center">
+                        <span class="text-indigo-400">{{ quiz.title }}</span>
+                        <a href="{% url 'take_quiz' quiz.id %}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md transition">Take Quiz</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center">No quizzes available.</p>
+    {% endif %}
+</div>
+{% endblock %}

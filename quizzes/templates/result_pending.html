@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-indigo-400 mb-6">Result Pending Validation</h2>
+    <p><strong>Quiz:</strong> {{ quiz.title }}</p>
+    <p><strong>Submitted Score:</strong> {{ submission.score }}</p>
+    <p><strong>Submitted At:</strong> {{ submission.submitted_at }}</p>
+    <p class="text-yellow-400">Your score is awaiting admin validation.</p>
+</div>
+{% endblock %}

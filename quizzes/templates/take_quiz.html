@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-indigo-400 mb-6">{{ quiz.title }}</h2>
+    <form method="post" id="quiz-form" class="space-y-6">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-6 p-4 bg-gray-800 bg-opacity-80 rounded-lg shadow-md">
+                <label for="{{ field.id_for_label }}" class="block text-lg font-medium text-gray-300">{{ field.label }}</label>
+                {{ field|add_class:"mt-2 w-full p-2 bg-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" }}
+            </div>
+        {% endfor %}
+        <div id="timer" class="bg-indigo-600 bg-opacity-80 p-4 rounded-md text-center text-lg font-medium">Time remaining: 60 seconds</div>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-md transition">Submit Quiz</button>
+    </form>
+    <script src="{% static 'js/quiz_timer.js' %}"></script>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-center text-indigo-400 mb-6">Login</h2>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.GET.next|default:'/' }}">
+        <div class="mb-3">
+            <label class="form-label block text-sm font-medium text-gray-300">Username</label>
+            <input type="text" name="username" class="mt-1 w-full p-2 bg-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div class="mb-3">
+            <label class="form-label block text-sm font-medium text-gray-300">Password</label>
+            <input type="password" name="password" class="mt-1 w-full p-2 bg-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-md transition">Login</button>
+    </form>
+    {% if messages %}
+        <div class="mt-4 bg-red-600 bg-opacity-80 p-4 rounded-md">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

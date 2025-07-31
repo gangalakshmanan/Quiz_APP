@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}  <!-- Add this line -->
+{% block content %}
+<div class="max-w-md mx-auto bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-center text-indigo-400 mb-6">Register</h2>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-300">{{ field.label }}</label>
+                {{ field|add_class:"mt-1 w-full p-2 bg-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" }}
+                {% if field.errors %}
+                    <span class="text-red-400 text-sm">{{ field.errors }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-md transition">Register</button>
+    </form>
+</div>
+{% endblock %}

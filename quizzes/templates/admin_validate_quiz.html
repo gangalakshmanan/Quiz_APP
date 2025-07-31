@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-indigo-400 mb-6">Validate Quiz Submissions</h2>
+    {% if submissions %}
+        <ul class="space-y-6">
+            {% for submission in submissions %}
+                <li class="p-4 bg-gray-700 rounded-md">
+                    <p><strong>User:</strong> {{ submission.user.username }}</p>
+                    <p><strong>Quiz:</strong> {{ submission.quiz.title }}</p>
+                    <p><strong>Submitted Score:</strong> {{ submission.score }}</p>
+                    <p><strong>Submitted At:</strong> {{ submission.submitted_at }}</p>
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="submission_id" value="{{ submission.id }}">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-300">Validated Score:</label>
+                            <input type="number" name="validated_score" min="0" max="{{ submission.quiz.questions.count }}" class="mt-1 w-full p-2 bg-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-md transition">Validate</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center">No pending submissions.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-center text-indigo-400 mb-6">Quiz Results</h2>
+    <p class="text-lg">Your score: <span class="font-bold text-indigo-300">{{ quiz_taker.score }} / {{ quiz_taker.quiz.questions.count }}</span></p>
+    <p class="text-lg">Completed at: <span class="font-bold text-indigo-300">{{ quiz_taker.completed_at }}</span></p>
+    <a href="{% url 'quiz_list' %}" class="block mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-md text-center transition">Back to Quizzes</a>
+</div>
+{% endblock %}
