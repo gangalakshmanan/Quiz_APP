@@ -78,10 +78,20 @@ def take_quiz(request, quiz_id):
     return render(request, 'take_quiz.html', {'quiz': quiz, 'form': form})
 
 @login_required
+# from .models import QuizTaker
+
 def result_pending(request, quiz_id):
-    quiz = Quiz.objects.get(id=quiz_id)
-    submission = QuizTaker.objects.filter(user=request.user, quiz=quiz).latest('submitted_at')
-    return render(request, 'result_pending.html', {'quiz': quiz, 'submission': submission})
+    pending_results = QuizTaker.objects.filter(
+        quiz_id=quiz_id, 
+        is_validated=False
+    ).order_by('-completed_at')  # ✅ Use valid field
+
+    return render(request, 'result_pending.html', {'pending_results': pending_results})
+
+# def result_pending(request, quiz_id):
+#     quiz = Quiz.objects.get(id=quiz_id)
+#     submission = QuizTaker.objects.filter(user=request.user, quiz=quiz).latest('submitted_at')
+#     return render(request, 'result_pending.html', {'quiz': quiz, 'submission': submission})
 @login_required
 def result(request, quiz_id):
     quiz_taker = QuizTaker.objects.get(user=request.user, quiz_id=quiz_id)

@@ -12,12 +12,14 @@
     <nav class="bg-gray-800 bg-opacity-80 backdrop-blur-md p-4 sticky top-0 z-10">
         <div class="container mx-auto flex justify-between items-center">
             <a href="{% url 'quiz_list' %}" class="text-2xl font-bold text-indigo-400">Quiz App</a>
+            
             <div class="space-x-4">
                 {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}" class="text-indigo-300 hover:text-indigo-100 transition">Logout</a>
                 {% else %}
                     <a href="{% url 'login' %}" class="text-indigo-300 hover:text-indigo-100 transition">Login</a>
                     <a href="{% url 'register' %}" class="text-indigo-300 hover:text-indigo-100 transition">Register</a>
+                    <a href="{% url 'admin:index' %}" class="btn btn-primary">Admin</a>
                 {% endif %}
             </div>
         </div>

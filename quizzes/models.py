@@ -32,7 +32,7 @@ class QuizTaker(models.Model):
     completed_at = models.DateTimeField(auto_now_add=True)
     is_validated = models.BooleanField(default=False)  # New field for validation
     validated_score = models.IntegerField(null=True, blank=True)  # Optional manual score
-
+    completed_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.user.username} - {self.quiz.title}"
   
